@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Server {
@@ -18,19 +20,23 @@ public class Server {
     private ServerSocket serverSocket;
     private List<Player> players;
 
+    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+
     public Server() {
         this.port = randomPort();
         this.ip = getIp();
         this.players = new ArrayList<>();
 
         ServerUtils.setInfo(this.ip, this.port);
-        //startServer();
+
+        executorService.submit(this::startServer);
     }
 
     private void startServer() {
         try {
             serverSocket = new ServerSocket(this.port);
             while(true){
+                System.out.println("Server Accept Connections");
                 Socket socket = serverSocket.accept();
                 Player player = new Player(socket);
                 this.players.add(player);
