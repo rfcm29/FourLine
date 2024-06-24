@@ -24,7 +24,7 @@ public class Server {
         this.players = new ArrayList<>();
 
         ServerUtils.setInfo(this.ip, this.port);
-        startServer();
+        //startServer();
     }
 
     private void startServer() {
