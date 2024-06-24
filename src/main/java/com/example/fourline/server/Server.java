@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,7 +21,7 @@ public class Server {
     private ServerSocket serverSocket;
     private List<Player> players;
 
-    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+    Executor executor = Executors.newSingleThreadExecutor();
 
     public Server() {
         this.port = randomPort();
@@ -29,7 +30,7 @@ public class Server {
 
         ServerUtils.setInfo(this.ip, this.port);
 
-        executorService.submit(this::startServer);
+        executor.execute(this::startServer);
     }
 
     private void startServer() {
