@@ -41,6 +41,7 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 Player player = new Player(socket);
                 this.players.add(player);
+                System.out.println("new player");
 
                 Thread thread = new Thread(player);
                 thread.start();

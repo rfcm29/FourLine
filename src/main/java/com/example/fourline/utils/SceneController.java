@@ -33,4 +33,12 @@ public final class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void showGame() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("client/game.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("GAME!");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
