@@ -1,18 +1,29 @@
 package tpldp.gitictac.client;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.Socket;
 
 public class Client {
-    private final ObjectInputStream objectInputStream;
-    private final ObjectOutputStream objectOutputStream;
+    private final DataInputStream dataInputStream;
+    private final DataOutputStream dataOutputStream;
 
-    public Client(String ip, String port) throws IOException {
-        Socket socket = new Socket(ip, Integer.parseInt(port));
-        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        objectOutputStream.flush();
-        objectInputStream = new ObjectInputStream(socket.getInputStream());
+    public Client(String ip, int port) throws IOException {
+        Socket socket = new Socket(ip, port);
+        dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        //dataOutputStream.flush();
+        dataInputStream = new DataInputStream(socket.getInputStream());
+    }
+
+    public void sendMove(int row, int col) throws IOException {
+        dataOutputStream.writeInt(row);
+        dataOutputStream.writeInt(col);
+    }
+
+    public int[] receiveMove() throws IOException {
+        int row = dataInputStream.readInt();
+        int col = dataInputStream.readInt();
+        return new int[] { row, col };
     }
 }

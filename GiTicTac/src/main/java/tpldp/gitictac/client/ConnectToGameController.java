@@ -22,7 +22,7 @@ public class ConnectToGameController
 
     @FXML
     public void connect(ActionEvent actionEvent) throws IOException {
-        ClientUtils.client = new Client(ipText.getText(), portText.getText());
+        ClientUtils.client = new Client(ipText.getText(), Integer.parseInt(portText.getText()));
         SceneController.showGame();
     }
 }
