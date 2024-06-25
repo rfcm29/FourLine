@@ -19,14 +19,12 @@ public class Server {
     private String ip;
 
     private ServerSocket serverSocket;
-    private List<Player> players;
 
     Executor executor = Executors.newSingleThreadExecutor();
 
     public Server() {
         this.port = 1234;
         this.ip = getIp();
-        this.players = new ArrayList<>();
 
         ServerUtils.setInfo(this.ip, this.port);
 
@@ -34,13 +32,14 @@ public class Server {
     }
 
     private void startServer() {
+        Game game = new Game();
         try {
             serverSocket = new ServerSocket(this.port);
-            while(true){
+            while(game.getPlayers().length < 2){
                 System.out.println("Server Accept Connections");
                 Socket socket = serverSocket.accept();
-                Player player = new Player(socket);
-                this.players.add(player);
+                Player player = new Player(socket, game);
+                game.addPlayer(player);
                 System.out.println("new player");
 
                 Thread thread = new Thread(player);

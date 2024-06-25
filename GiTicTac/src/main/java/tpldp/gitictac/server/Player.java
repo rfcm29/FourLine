@@ -10,10 +10,12 @@ public class Player implements Runnable, Serializable {
     private Socket socket;
     private final transient ObjectInputStream input;
     private final transient ObjectOutputStream output;
+    private Game game;
 
 
-    public Player(Socket socket) {
+    public Player(Socket socket, Game game) {
         this.socket = socket;
+        this.game = game;
         try {
             this.input = new ObjectInputStream(socket.getInputStream());
             this.output = new ObjectOutputStream(socket.getOutputStream());
@@ -28,11 +30,20 @@ public class Player implements Runnable, Serializable {
 
         while(true){
             try{
-                object = input.readObject();
-                System.out.println("teste");
+                Move move = (Move) input.readObject();
+                game.processMove(move, this);
             } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                break;
             }
+        }
+    }
+
+    public void sendMove(Move move) {
+        try {
+            output.writeObject(move);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
