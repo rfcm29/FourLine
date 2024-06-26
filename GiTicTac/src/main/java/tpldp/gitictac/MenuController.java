@@ -9,14 +9,6 @@ import java.io.IOException;
 
 public class MenuController {
     @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
-    @FXML
     public void onCreateServer(ActionEvent actionEvent) throws IOException {
         SceneController.showLobby();
     }

@@ -7,24 +7,24 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Server {
     private int port;
     private String ip;
+    private int boardSize;
+    Game game;
 
     private ServerSocket serverSocket;
 
     Executor executor = Executors.newSingleThreadExecutor();
 
-    public Server() {
-        this.port = 1234;
+    public Server(int boardSize) {
+        this.port = 80;
         this.ip = getIp();
+        this.boardSize = boardSize;
 
         ServerUtils.setInfo(this.ip, this.port);
 
@@ -32,21 +32,43 @@ public class Server {
     }
 
     private void startServer() {
-        Game game = new Game();
+        game = new Game();
+        int totalPlayers = 0;
         try {
             serverSocket = new ServerSocket(this.port);
-            while(game.getPlayers().length < 2){
-                System.out.println("Server Accept Connections");
+            while(totalPlayers < 2){
                 Socket socket = serverSocket.accept();
                 Player player = new Player(socket, game);
                 game.addPlayer(player);
-                System.out.println("new player");
+                player.sendMessage(boardSize);
 
                 Thread thread = new Thread(player);
                 thread.start();
+                totalPlayers++;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        randomOrder();
+        startGame();
+    }
+
+    private void startGame() {
+        for(Player player: game.getPlayers()){
+            player.sendMessage(true);
+        }
+    }
+
+    private void randomOrder() {
+        Random random = new Random();
+        int result = random.nextInt(2)+1;
+        for(int i = 0; i < 2; i++){
+            if((result - 1) == i){
+                game.getPlayers()[i].sendMessage("X");
+            } else {
+                game.getPlayers()[i].sendMessage("O");
+            }
+
         }
     }
 

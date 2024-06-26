@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="594.0" style="-fx-background-color: FFF2D1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="594.0" style="-fx-background-color: FFF2D1;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tpldp.gitictac.game.GameController">
    <left>
       <VBox minWidth="50.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
    </left>
@@ -23,7 +23,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: D3D5D2;" BorderPane.alignment="CENTER">
          <children>
-            <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="338.0" prefWidth="494.0">
+            <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" prefHeight="338.0" prefWidth="494.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,7 +39,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="72.0" prefWidth="108.0" />
+                  <Button fx:id="btn00" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="72.0" prefWidth="108.0" />
                   <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="118.0" GridPane.columnIndex="1" />
                   <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="121.0" GridPane.columnIndex="2" />
                   <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="113.0" GridPane.columnIndex="3" />

@@ -12,7 +12,7 @@ public final class SceneController {
 
     public static void menu() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 594, 418);
         stage.setTitle("MENU!");
         stage.setScene(scene);
         stage.show();
@@ -20,7 +20,7 @@ public final class SceneController {
 
     public static void showLobby() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("server/server-lobby.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 594, 418);
         stage.setTitle("LOBBY!");
         stage.setScene(scene);
         stage.show();
@@ -28,16 +28,24 @@ public final class SceneController {
 
     public static void showConnectLobby() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("client/connect-to-game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 594, 418);
         stage.setTitle("CONNECT TO SERVER!");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void showGame() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("client/game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("GAME!");
+    public static void showTabuleiro5() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("client/tabuleiro-5.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 594, 418);
+        stage.setTitle("JOGO!");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void showTabuleiro10() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("client/tabuleiro-10.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 594, 418);
+        stage.setTitle("JOGO!");
         stage.setScene(scene);
         stage.show();
     }
