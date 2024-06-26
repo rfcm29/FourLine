@@ -36,19 +36,18 @@ public class Server {
     private void startServer() {
         try {
             serverSocket = new ServerSocket(this.port);
-            while(true){
-                System.out.println("Server Accept Connections");
+            while(players.size() < 2){
                 Socket socket = serverSocket.accept();
                 Player player = new Player(socket);
                 this.players.add(player);
-                System.out.println("new player");
-
+                ServerUtils.addLine("Player " + players.size() + " joined!");
                 Thread thread = new Thread(player);
                 thread.start();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        ServerUtils.addLine("Lobby full, game ready to start!");
     }
 
     private String getIp() {

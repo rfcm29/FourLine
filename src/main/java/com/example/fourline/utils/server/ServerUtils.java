@@ -8,4 +8,8 @@ public final class ServerUtils {
     public static void setInfo(String ip, Integer port){
         controller.setInfo(ip, port);
     }
+
+    public static void addLine(String text){
+        controller.addLine(text);
+    }
 }

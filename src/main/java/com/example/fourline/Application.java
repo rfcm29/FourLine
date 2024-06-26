@@ -1,6 +1,7 @@
 package com.example.fourline;
 
 import com.example.fourline.utils.SceneController;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.io.IOException;
